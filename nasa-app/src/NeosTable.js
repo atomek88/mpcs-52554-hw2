@@ -1,28 +1,45 @@
-import { Row } from 'row';
+import Row from './row';
 import React, {Component} from 'react';
+
+
+
 // table  class
 export class NeosTable extends React.Component {
   constructor(props){
     super(props)
-    this.state = { asteroid: null }
+    this.state = { hazard: false}
+    // add asteroids and update state?
   }
 
-  addAsteroids = () => {
-    this.state.asteroids.map( asteroid => {
-      return <Row asteroid={asteroid}  />
-    })
-  }
+
 
 
 
   render() {
+
     return (
       <div>
-      <div class="container">
-      <p class="pull-left"> checkbox </p>
+      <div class="row">
+        <div class="col-sm-12">
+          <form class="form-row">
+            <div class="form-check">
+              <label class="form-check-label">
+              </label>
+              </div>
+            <div class="form-group mx-auto">
+            {/* <input id="test" step="1000" type="range" value="30000" min="0" max="60000"> */}
 
-      <p class="pull-right"> scrollbard </p>
-      </div>
+                  <label id="speed">
+                  "Minimum Speed: "<span>30000</span>" mph"
+                  </label>
+
+              </div>
+            </form>
+          </div>
+        </div>
+
+
+
 
       <div class="row table-responsive">
         <div class="col-sm-16 col-md-10">
@@ -33,9 +50,11 @@ export class NeosTable extends React.Component {
               <th>Speed (mph)</th>
               <th>Max. Diameter (feet)</th>
             </thead>
-            {this.state.asteroids.map( asteroid => {
-              return <Row asteroid={asteroid} />
-            })}
+              <tbody>{
+                this.props.asteroids.map( asteroid => {
+                  return <Row asteroid={asteroid}  />
+                })
+              }</tbody>
             </table>
           </div>
         </div>
@@ -46,5 +65,6 @@ export class NeosTable extends React.Component {
 
 
 }
+
 
 export default NeosTable;

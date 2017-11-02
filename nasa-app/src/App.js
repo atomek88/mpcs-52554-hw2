@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { NeosTable } from 'neosTable';
+import NeosTable from './neosTable';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,19 +22,41 @@ class App extends React.Component {
     let dates = "neo/rest/v1/feed?start_date=2017-11-01&end_date=2017-11-08"
     let api = "&api_key=bQZlcpOVkVZMM2V8Y3uCmXQTzS1GmW7Pq2Z3qHuW"
     const NEO_url = url + dates + api
-    fetch(NEO_url).then(this.parseResponse).then(this.detailsNEOS)
+    fetch(NEO_url).then(this.parseResponse).then(this.setData)
   }
 
   parseResponse = (response) => { return response.json(); }
 
   // event.target.value for switching checkbox
 
+  setData = (data) => {
+    console.debug(data)
+    let all = data['near_earth_objects']
+    let completeArray = []
+    let newArray = []
+    console.log(all)
+    Object.keys(all).forEach(date => Object.keys(all[date]).forEach(event => {
+      completeArray = completeArray.concat(all[date][event])
+
+
+      completeArray.forEach(function (item) {
+        newArray.concat(item);
+      })
+    }))
+    console.log(completeArray[0])
+    console.log(completeArray[0].absolute_magnitude_h)
+    console.log(completeArray[0].is_potentially_hazardous_asteroid)
+    console.log(newArray)
+    this.setState({ asteroids: newArray})
+  }
+
+
 // callback for getNEOS
   detailsNEOS = (data) => {
     console.debug(data) // show data
     if (data.length >0){
       let new_data = data.results[2]
-      this.setState({ asteroid: new_data})
+      this.setState({ asteroids: new_data})
       console.log(new_data.length)
 // save the asteroid array to state
       }
@@ -63,7 +85,7 @@ class App extends React.Component {
         </p>
       </div>
 
-        <NeosTable />
+        <NeosTable asteroids={this.state.asteroids}/>
       </div>
 
 
