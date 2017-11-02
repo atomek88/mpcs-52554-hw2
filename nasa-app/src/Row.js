@@ -1,5 +1,6 @@
+import React, {Component} from 'react';
 // row class
-class Row extends React.Component {
+export class Row extends React.Component {
   constructor(props){
     super(props)
     this.state = { asteroid: null }
@@ -16,5 +17,4 @@ class Row extends React.Component {
       </tr>
   )}
 }
-
-export default row;
+export default Row;

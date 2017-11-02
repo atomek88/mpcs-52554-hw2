@@ -1,6 +1,7 @@
-import { Row } from 'row.js'
+import { Row } from 'row';
+import React, {Component} from 'react';
 // table  class
-class NeosTable extends React.Component {
+export class NeosTable extends React.Component {
   constructor(props){
     super(props)
     this.state = { asteroid: null }
@@ -8,7 +9,7 @@ class NeosTable extends React.Component {
 
   addAsteroids = () => {
     this.state.asteroids.map( asteroid => {
-      return <Row asteroid={asteroid} otherProp={ otherProp } />
+      return <Row asteroid={asteroid}  />
     })
   }
 
@@ -16,6 +17,7 @@ class NeosTable extends React.Component {
 
   render() {
     return (
+      <div>
       <div class="container">
       <p class="pull-left"> checkbox </p>
 
@@ -37,7 +39,7 @@ class NeosTable extends React.Component {
             </table>
           </div>
         </div>
-
+        </div>
     )
   }
 
@@ -45,4 +47,4 @@ class NeosTable extends React.Component {
 
 }
 
-export default neos_results;
+export default NeosTable;

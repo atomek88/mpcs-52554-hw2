@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { NeosTable } from 'row.js'
+import { NeosTable } from 'neosTable';
 
 class App extends React.Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class App extends React.Component {
   detailsNEOS = (data) => {
     console.debug(data) // show data
     if (data.length >0){
-      let new_data = data.near-earth-objects
+      let new_data = data.results[2]
       this.setState({ asteroid: new_data})
       console.log(new_data.length)
 // save the asteroid array to state
@@ -53,6 +53,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+      <div class="container">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to the NEO (Near-Earth Object) Radar</h1>
@@ -62,7 +63,11 @@ class App extends React.Component {
         </p>
       </div>
 
-    );
+        <NeosTable />
+      </div>
+
+
+    )
   }
 }
 
